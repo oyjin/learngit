@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pokemon</title>
+    <style>
+        .bg {
+            width: 500px;
+            height: 600px;
+            margin: auto;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #0985C5;
+        }
+        
+        .top {
+            width: 300px;
+            height: 150px;
+            border-radius: 160px 160px 12px 12px;
+            background-color: #FE0002;
+            border: black solid 12px;
+            margin-bottom: -10px;
+        }
+        
+        .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 60px;
+            background-color: white;
+            border: black 12px solid;
+            position: absolute;
+            margin-top: -49px;
+            margin-left: 110px;
+        }
+        
+        .circle1 {
+            width: 60px;
+            height: 60px;
+            border-radius: 31px;
+            /* background-color: #FE0002; */
+            margin: auto;
+            margin-top: 8px;
+            border: 2px solid black;
+        }
+        
+        .bottom {
+            width: 300px;
+            height: 150px;
+            border-radius: 12px 12px 160px 160px;
+            background-color: white;
+            border: black solid 12px;
+            margin-top: -10px;
+        }
+        
+        .mo {
+            transition: transform 2s;
+        }
+        
+        .mo:hover {
+            transform: translate(0, -130px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="mo">
+            <div class="top"></div>
+            <div class="circle">
+                <div class="circle1"></div>
+            </div>
+        </div>
+        <div class="bottom"></div>
+    </div>
+</body>
+
+</html>
