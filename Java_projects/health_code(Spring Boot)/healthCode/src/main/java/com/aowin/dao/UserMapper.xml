@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace 映射文件的命名空间 写接口的全称  -->
+<mapper namespace="com.aowin.dao.UserMapper">
+  
+  <!-- 
+  	查询语句一定要设置 resultType或者resultMap的属性  用来对结果集做映射的
+  	
+  		resultType 自动映射，会将查询结果的列 自动映射到java中对象的属性中的
+   -->
+  <select id="login" resultType="com.aowin.model.User">
+  	select
+  		userid,
+  		username,
+  		password,
+  		role
+  	from
+  		user
+  	where
+  		username = #{username}
+  	and
+  		password = #{password}
+  	
+  </select>
+  
+  <select id="isSubmitted" resultType="java.lang.Integer">
+  	select 
+  		count(*) 
+  	from 
+  		message
+	where 
+		userid=#{userid}
+  </select>
+  
+  <insert id="addRecord">
+    insert into message
+  		(userid,name,card,mobile,address,ptime) 
+  	values
+  		(#{userid},#{name},#{card},#{mobile},#{address},#{ptime})
+  </insert>
+  
+   <select id="selMessage" resultType="com.aowin.model.Message">
+  	select 
+  		userid,
+  		name,
+  		card,
+  		mobile,
+  		address,
+  		ptime 
+  	from 
+  		message
+	where 
+		userid=#{userid}
+  </select>
+  
+  <insert id="userRegist">
+    insert into user
+  		(username,password,role) 
+  	values
+  		(#{username},#{password},0)
+  </insert>
+  
+  <select id="select" parameterType="com.aowin.model.User" resultType="com.aowin.model.User">
+		select
+			*
+		from 
+			user	
+		<where>
+			<if test="userid != null and userid != ''">
+				and userid like concat('%',#{userid},'%')
+			</if>
+			<if test="username != null and username != ''">
+				and username like concat('%',#{username},'%')
+			</if>
+			<if test="role != null and role != ''">
+				and role = #{role}
+			</if>
+		</where>
+	</select>
+	<insert id="insert" parameterType="com.aowin.model.User">
+		insert into user (username,password,role) values (#{username},#{password},#{role})
+	</insert>
+	
+  	<update id="update" parameterType="com.aowin.model.User">
+		update user set username = #{username},password=#{password} where userid=#{userid}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from user where userid = #{userid}
+	</delete>
+	
+	<select id="selRole" resultType="java.lang.Integer">
+  	select 
+  		role 
+  	from 
+  		user
+	where 
+		userid=#{userid}
+  </select>
+</mapper>

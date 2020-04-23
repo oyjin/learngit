@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="script/common.js" ></script>
+<script type="text/javascript" src="script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+<style type="text/css">           
+
+    #nav {
+    		width:500px;
+            margin: 50px auto;
+            height: 40px;
+            background-color: #690;
+            font-size: 18px;
+			font-weight: bold;
+          }         
+    #nav ul {
+        list-style: none;
+        margin-left: 80px;
+        }           
+    #nav li {
+        display: inline;                
+        }           
+    #nav a {
+        line-height: 40px;
+        color: #fff;
+        text-decoration: none;
+        padding: 20px 20px;
+        }           
+    #nav a:hover {
+        background-color: #060;
+        }
+
+</style>
+</head>
+<body>
+	<div id="phase">
+	<div v-show="isIndex">
+	<h1 style="text-align:center">用户管理</h1>
+	<div v-show="type!=1" style="width:100%;text-align:center;font-size:20px">
+       	{{type==2?"操作成功":"操作失败，请联系管理员"}}
+     </div>
+	<div class="query_div">
+		&nbsp;&nbsp;&nbsp;编号：<input type="text" v-model.trim.lazy="queryCondition.userid"/>&nbsp;&nbsp;&nbsp;
+		用户名:<input type="text" v-model.trim.lazy="queryCondition.uername"/>&nbsp;&nbsp;&nbsp;
+		用户权限：
+			<input type="radio" value="" name="sel" v-model="queryCondition.role" checked="true"/>全部
+			<input type="radio" value="1" name="sel" v-model="queryCondition.role"/>管理员
+			<input type="radio" value="0" name="sel" v-model="queryCondition.role"/>普通用户
+			&nbsp;&nbsp;&nbsp;
+		<input type="button" value="查询"  @click="goPage(1)"/>
+	</div>
+	<div><input type="button" value="新增用户" @click="addDiv()"></div>
+	<table width="100%"  border="0" align="center" cellspacing="1" class="c" style="text-align:center">
+	  <thead>
+			<tr>
+				<td>用户编号</td>
+				<td>用户名</td>
+				<td>密码</td>
+				<td>用户权限</td>
+				<td v-show="right">操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="(item,index) in list">
+				<td>{{item.userid}}</td>
+				<td>{{item.username}}</td>
+				<td>******</td>
+				<td>{{item.role}}</td>
+				<td v-show="right">
+					<input type='button' value='修改' @click="modify(index)"/>&nbsp;
+					<input type='button' value='删除' @click="delet(index)"/>
+				</td>
+		</tr>
+	</tbody>
+	</table>
+	<div>
+		<ul id="nav">
+			<li>
+				<a href="javascript:void(0)" @click="goPage(pageInfo.pageNum-1)">上一页</a>
+			</li>
+
+
+			<li v-for="item in pageInfo.navigatepageNums"
+				aria-controls="dataTables-example" tabindex="0">
+				<a href="javascript:void(0)" @click="goPage(item)">{{item}}</a>
+			</li>
+
+			<li>
+			<a href="javascript:void(0)" @click="goPage(pageInfo.pageNum+1)">下一页</a>
+			</li>
+		</ul>
+	</div>
+	</div>
+	<div v-show="isEdit">
+		<table width="100%"  border="0" align="center" cellspacing="1" class="c">
+	  <tr>
+		<td class="title1"></td>
+		<td class="title1"></td>
+		</tr>
+	  <tr v-show="isUpdate">
+		<td align="center">用户编号</td>
+		<td align="center"><input type="text" readonly="readonly" :value="msPhase.userid"/></td>
+	</tr>
+	<tr>
+		<td align="center">用户名</td>
+		<td align="center"><input type="text" v-model.lazy.trim="msPhase.username" placeholder="1-10位字母或数字"/></td>
+	</tr>
+	<tr>
+		<td align="center">密码</td>
+		<td align="center"><input type="password" v-model.lazy.trim="msPhase.password" placeholder="3-6位字母或数字"/></td>
+	</tr>
+	  <tr>
+		<td align="center">用户权限</td>
+		<td align="center"><input type="radio" name="role" value="1" v-model="msPhase.role"/>管理员 <input type="radio" name="role" value="0" checked="true" v-model="msPhase.role"/>普通用户</td>
+		</tr>
+	  <tr>
+		<td height="18" colspan="2" align="center"> <input type="button" value="保存" @click="save()"/></td>
+	</tr>
+	</table>
+	</div>
+	</div>
+	
+	<script type="text/javascript" src="js/manage.js"></script>
+	</body>
+</html>

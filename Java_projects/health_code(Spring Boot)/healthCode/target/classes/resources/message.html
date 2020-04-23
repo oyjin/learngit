@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>信息上报</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="script/common.js" ></script>
+<script type="text/javascript" src="script/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+</head>
+<body>
+	<div id="app">
+	<form>
+		<table width="100%"  border="0" align="center" cellspacing="1" class="c">
+	  <tr>
+		<td class="title1"></td>
+		<td class="title1"></td>
+		</tr>
+	  <tr>
+		<td align="center">用户姓名</td>
+		<td align="center"><input type="text" v-model="message.name"/></td>
+	</tr>
+	<tr>
+		<td align="center">身份证号</td>
+		<td align="center"><input type="text" v-model="message.card"/></td>
+	</tr>
+	<tr>
+		<td align="center">手机号码</td>
+		<td align="center"><input type="text" v-model="message.mobile"/></td>
+	</tr>
+	  <tr>
+		<td align="center">是否湖北地区</td>
+		<td align="center"><input type="radio" name="address" v-model="message.address" value="1" />是 <input type="radio" name="address" v-model="message.address" value="0" checked="true"/>否</td>
+		</tr>
+	  <tr>
+		<td height="18" colspan="2" align="center"><input type="button" value="重置" /> <input type="button" value="提交" :disabled="!btnEnabled" @click="submitUser()"></td>
+		</tr>
+	</table>
+	</form>
+
+	</div>
+	
+	<script type="text/javascript">
+		var vue = new Vue({
+			el: "#app",
+			data:{
+				message:{
+					name: "",
+					id: "",
+					mobile: "",
+					address: ""
+				},
+				btnEnabled : true
+			},
+			methods : {
+				submitUser : function(){
+					//数据校验
+					var reg1 = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+					var reg2 = /^1[35-8]\d{9}$/;
+					if(this.message.name==""||this.message.monile==""||this.message.card==""){
+						alert("请填写完整再提交！")
+					}else if(reg1.test(this.message.card) == false){
+						alert("身份证输入不合法！");
+					}else if(reg2.test(this.message.mobile) == false){
+						alert("手机号码不合法！")
+					}else{
+						this.$http.post("user/submit",this.message,{emulateJSON:true}).then(
+								(resp) => {
+									console.log(resp);
+									if(resp.bodyText=="提交成功"){
+										alert("提交成功!");
+										vue.btnEnabled=false;
+									}else{
+										alert(resp.bodyText)
+									}
+									
+								},
+								(resp) => {
+									console.error(resp);	
+								}
+							);
+					}
+				}
+			}
+		});
+	
+	</script>
+	</body>
+</html>

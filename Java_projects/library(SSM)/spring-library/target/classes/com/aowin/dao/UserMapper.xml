@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace 映射文件的命名空间 写接口的全称  -->
+<mapper namespace="com.aowin.dao.UserMapper">
+  
+  <!-- 
+  	查询语句一定要设置 resultType或者resultMap的属性  用来对结果集做映射的
+  	
+  		resultType 自动映射，会将查询结果的列 自动映射到java中对象的属性中的
+   -->
+  <select id="login" resultType="com.aowin.model.User">
+  	select
+  		userid,
+  		username,
+  		password,
+  		idcard,
+  		phone,
+  		createtime,
+  		status,
+  		owing_money
+  	from
+  		user
+  	where
+  		username = #{username}
+  	and
+  		password = #{password}
+  	
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace - 对应具体的接口的名字  -->
+<mapper namespace="com.aowin.dao.Bicycle_infoMapper">
+
+	<select id="selInfo" resultType="com.aowin.model.Bicycle_info">
+		select
+			*
+		from 
+			bicycle_info	
+		where
+			status=5
+	</select>
+	
+	<select id="selFixed" resultType="com.aowin.model.Bicycle_info">
+		select
+			*
+		from 
+			bicycle_info	
+		where
+			status=7
+	</select>
+	
+	<select id="selScrap" resultType="com.aowin.model.Bicycle_info">
+		select
+			*
+		from 
+			bicycle_info	
+		where
+			status=8
+	</select>
+	
+	<update id="updateInfo" >
+  		update 
+  			bicycle_info 
+  		set 
+  		status=5,pile_id=null 
+  		where 
+  		bicycle_id=#{bicycle_id} and status=3
+  	</update>
+  	
+  	<update id="updateStatus" >
+  		update 
+  			bicycle_info 
+  		set 
+  		status=#{status} 
+  		where 
+  		bicycle_id=#{bicycle_id} and status=5
+  	</update>
+  	
+  	<update id="fixIn" >
+  		update 
+  			bicycle_info 
+  		set 
+  		status=3,pile_id=#{pile_id} 
+  		where 
+  		bicycle_id=#{bicycle_id} and status=7
+  	</update>
+
+</mapper>

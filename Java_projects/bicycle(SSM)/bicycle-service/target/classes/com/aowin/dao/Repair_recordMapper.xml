@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace - 对应具体的接口的名字  -->
+<mapper namespace="com.aowin.dao.Repair_recordMapper">
+
+	<insert id="addRepairRecord" parameterType="com.aowin.model.Repair_record">
+	    insert into repair_record 
+	  		(bicycle_id,repair_type,repair_part,repair_result,fee,repairer,repair_date) 
+	  	values
+	  		(#{bicycle_id},#{repair_type},#{repair_part},#{repair_result},#{fee},#{repairer},#{repair_date})
+ 	 </insert>
+ 	 
+ 	 <select id="selRepairId" resultType="java.lang.Integer">
+		select
+			record_id
+		from 
+			repair_record	
+		where
+			bicycle_id=#{bicycle_id} and repair_date=#{repair_date}
+	</select>
+	
+	<select id="selRecordId" resultType="java.lang.Integer">
+		select
+			record_id
+		from 
+			repair_record	
+		where
+			bicycle_id=#{bicycle_id} and repair_result=2
+	</select>
+
+</mapper>

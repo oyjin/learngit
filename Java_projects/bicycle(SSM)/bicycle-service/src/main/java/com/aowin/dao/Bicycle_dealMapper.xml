@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace - 对应具体的接口的名字  -->
+<mapper namespace="com.aowin.dao.Bicycle_dealMapper">
+	
+	<insert id="addDeal">
+	    insert into bicycle_deal 
+	  		(bicycle_id,pile_id,card_id,create_time,record_id,deal_type,deal_name,is_fee,CHG_MONEY) 
+	  	values
+	  		(#{bicycle_id},#{pile_id},#{card_id},#{create_time},#{record_id},6,"维修调出",0,0)
+ 	 </insert>
+ 	 
+ 	 <insert id="addRepairDeal">
+	    insert into bicycle_deal 
+	  		(bicycle_id,create_time,record_id,deal_type,deal_name,is_fee,CHG_MONEY) 
+	  	values
+	  		(#{bicycle_id},#{create_time},#{record_id},8,"维修",1,#{chg_money})
+ 	 </insert>
+ 	 
+ 	 <insert id="addFixin">
+	    insert into bicycle_deal 
+	  		(bicycle_id,pile_id,create_time,record_id,deal_type,deal_name,is_fee,CHG_MONEY) 
+	  	values
+	  		(#{bicycle_id},#{pile_id},#{create_time},#{record_id},7,"维修调入",0,0)
+ 	 </insert>
+ 	 
+ 	 <insert id="addScrapReal">
+	    insert into bicycle_deal 
+	  		(bicycle_id,create_time,record_id,deal_type,deal_name,is_fee,CHG_MONEY) 
+	  	values
+	  		(#{bicycle_id},#{create_time},#{record_id},9,"报废",0,0)
+ 	 </insert>
+ 	 
+ 	 <select id="selLend" resultType="java.lang.Double">
+		select 
+			round(count(*)/30,3) 
+		from 
+			bicycle_deal 
+		where deal_type=2 and pile_id in 
+		<foreach collection="list" open="(" close=")" item="pile_id" separator=",">
+  			#{pile_id}
+  		</foreach>
+	</select>
+	
+	<select id="selRepay" resultType="java.lang.Double">
+		select 
+			round(count(*)/30,3) 
+		from 
+			bicycle_deal 
+		where deal_type=3 and pile_id in 
+		<foreach collection="list" open="(" close=")" item="pile_id" separator=",">
+  			#{pile_id}
+  		</foreach>
+	</select>
+  	
+  	
+  	<select id="selEnter" resultType="java.lang.Double">
+		select 
+			round(count(*)/30,3) 
+		from 
+			bicycle_deal 
+		where deal_type=5 and pile_id in 
+		<foreach collection="list" open="(" close=")" item="pile_id" separator=",">
+  			#{pile_id}
+  		</foreach>
+	</select>
+  	
+  	<select id="selExport" resultType="java.lang.Double">
+		select 
+			round(count(*)/30,3) 
+		from 
+			bicycle_deal 
+		where deal_type=4 and pile_id in 
+		<foreach collection="list" open="(" close=")" item="pile_id" separator=",">
+  			#{pile_id}
+  		</foreach>
+	</select>
+	
+
+</mapper>

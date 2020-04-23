@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登录界面</title>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+</head>
+<body>
+	<div id="app">
+	<div  v-show="isLogin" style="width:350px;text-align:center;margin:auto;margin-top:150px">
+	用户名：<input type="text" id="nm" v-model="user.username"><br><br>
+	密码：<input type="password" id="ps" v-model="user.password"><br><br>
+	<input type="button" value="登录" @click="submitUser()">&nbsp;&nbsp;&nbsp;<input type="button" value="注册" @click="skip()">
+	</div>
+	<div  v-show="isRegist" style="width:350px;text-align:center;margin:auto;margin-top:150px">
+	用户名：<input type="text" id="nm1" v-model="name" placeholder="请设置用户名"><br><br>
+	密码：<input type="password" id="pass" v-model="password1" placeholder="请输入密码"><br><br>
+	确认密码：<input type="password" id="passs1" v-model="password2" placeholder="请再次输入密码"><br><br>
+	<input type="button" value="提交" @click="register()">
+	</div>
+	</div>
+	<script type="text/javascript">
+		var vue = new Vue({
+			el: "#app",
+			data:{
+				user:{
+					username: "",
+					password: ""
+				},
+				name: "",
+				password1: "",
+				password2: "",
+				isLogin: true,
+				isRegist: false
+			},
+			methods : {
+				submitUser : function(){
+					this.$http.post("user/login",this.user).then(
+							(resp) => {
+								console.log(resp);
+								if(resp.bodyText=="ok"){
+									window.location.href="index.html";
+								}else{
+									alert("用户名或密码错误！")
+								}
+								
+							},
+							(resp) => {
+								console.error(resp);	
+							}
+						);
+				},
+				skip : function(){
+					this.isLogin = false;
+					this.isRegist = true;
+				},
+				register : function(){
+					if(this.name == ""){
+						alert("用户名不能为空")
+					}else if(this.password1!=this.password2){
+						alert("两次输入的密码不一致，请重新输入")
+					}else{
+						this.user.username=this.name;
+						this.user.password = this.password1;
+						this.$http.post("user/regist",this.user).then(
+								(resp) => {
+									console.log(resp);
+									if(resp.bodyText=="ok"){
+										alert("注册成功！")
+										window.location.href="index.html";
+									}else{
+										alert("注册失败，请稍后再试！")
+									}
+									
+								},
+								(resp) => {
+									console.error(resp);	
+								}
+							);
+					}
+					
+				}
+			}
+		});
+	
+	</script>
+</body>
+</html>

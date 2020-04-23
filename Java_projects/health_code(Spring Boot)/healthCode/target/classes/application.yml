@@ -1,0 +1,17 @@
+spring:
+  redis:
+# 主机名
+    host: localhost
+    database: 0
+    port: 6379
+    password: 38324
+# 配置数据源  datasource:    url: jdbc:mysql://localhost:3306/health_code?useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 38324
+    
+    
+logging:  file: d:/logs/boot-demo.log
+  level:    root: error
+    
+server:  port: 8080

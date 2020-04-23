@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Aowin Library</title>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div style="width:95%;text-align:right">
+			<a href="login.html">登录</a>
+			<a href="return.html">还书</a>
+			<a href="#">逾期缴费</a>
+		</div>
+		<h1 style="text-align:center">图书列表</h1>
+		<table border="1" width="90%" align="center" style="text-align:center">
+			<tr>
+				<th>图书id</th>
+				<th>图书名称</th>
+				<th>图书作者</th>
+				<th>图书价格（元）</th>
+				<th>出版社</th>
+				<th>图书状态</th>
+				<th>图书编号</th>
+				<th>操作</th>
+			</tr>
+			<tr v-for="(book,index) in books">
+				<td>{{book.bookid}}</td>
+				<td>{{book.bookname}}</td>
+				<td>{{book.author}}</td>
+				<td>{{book.price}}</td>
+				<td>{{book.publisher}}</td>
+				<td>在馆</td>
+				<td>{{book.bookcode}}</td>
+				<td style="text-align:center"><input type='button' value='租书' @click="lend(index)"/></td>
+			</tr>
+		</table>
+	</div>
+	<script type="text/javascript">
+	var vue = new Vue({
+		el: "#app",
+		data : {
+			books : []
+		},
+		methods : {
+			goPage : function(){
+				this.$http.get("book/select").then(
+						(resp) => {
+							// resp是一个Response对象 该对象属性 body - 对象      bodyText 服务端响应的字符串
+							console.log(resp);
+							this.books = resp.body;
+						},
+						(resp) => {
+							console.error("请求失败，"+resp);
+						}
+						
+					);
+			},
+			lend: function(index){
+				var bookid = this.books[index].bookid;
+				var data = {
+						bookid:bookid
+					};
+				var params = {
+					params : data
+				};
+				this.$http.get("lendBook",params).then(
+						(resp) => {
+							alert(resp.bodyText);
+							location.reload();
+						},
+						(resp) => {
+							console.error("请求失败，"+resp);
+						}	
+				
+				);
+			}
+		},
+		mounted : function(){
+			this.goPage();
+		}
+	});
+	
+	</script>
+</body>
+</html>

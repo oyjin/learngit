@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: healthCode
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: kk
+Implementation-Vendor-Id: com.ouy.springboot
+Build-Jdk: 1.8.0_241
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/healthCode
+Created-By: Maven Integration for Eclipse
+

@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>自行车系统管理平台登录</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/metisMenu.min.css" rel="stylesheet">
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<!-- jQuery -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- 导入vue -->
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/vue-resource.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+
+
+</head>
+
+<body>
+
+	<div class="container" id="login">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">请登录</h3>
+					</div>
+					<div class="panel-body">
+						<div v-show="showInfo" class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<span>{{message}}</span>
+						</div>
+
+						<fieldset id="d1" v-if="type === 'passLogin'">
+							<div class="form-group">
+								<input class="form-control" placeholder="用户名"  v-model.trim="syuser.loginName" type="text" autofocus>
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="密码"  v-model.trim="syuser.password" type="password">
+							</div>
+
+							<button @click="login()" :disabled="disabled" class="btn btn-lg btn-success btn-block">登录</button><br>
+							<p style="font-size:13px;color:blue" @click="phoneCode()">手机验证码登录>>>></p>
+						</fieldset>
+						
+						<fieldset id="d2" v-if="type === 'phoneCode'">
+							<div class="form-group">
+								<input class="form-control" placeholder="手机号"  v-model.trim="syuser.mobilePhone" type="text" autofocus>
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="验证码"  v-model.trim="syuser.authCode" type="text">
+							</div>
+							<input type="button" v-model="text" :disabled="disabled2" @click="showtime(60)" style="margin-left:100px"><br><br>
+							<button @click="login2()" :disabled="disabled" class="btn btn-lg btn-success btn-block">登录</button><br>
+							<p style="font-size:13px;color:blue" @click="passLogin()">账号密码登录>>>></p>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+	 	var vm = new Vue({
+			el: "#login",
+			data: {
+				showInfo: false,
+				syuser: {},
+				message: "",
+				disabled: false,
+				text: "获取手机验证码",
+				disabled2: false,
+				type: 'passLogin'
+			},
+			computed:{
+				//标记是否可以提交数据
+				flag: function(){
+					var reg = /^\s*$/;
+					var loginName = this.syuser.loginName;
+						var password = this.syuser.password;
+						
+						if(!loginName || reg.test(loginName)){
+							return false;
+						}
+					if(!password || reg.test(password)){
+						return false;
+					}
+					
+					return true;
+				}
+			},
+			
+			methods:{
+				login: function(){
+					if(!this.flag){
+						this.message = "请填写完整的信息";
+						this.showInfo = true;
+					}else{
+						this.disabled = true;
+						this.showInfo = false;
+						this.$http.post("login",this.syuser,{emulateJSON:true})
+							.then(
+								(resp) => {
+									if(resp.body == ""){
+										this.showInfo = true;
+										this.message = "用户名不存在或者密码错误";
+										this.disabled = false;
+									}else{
+										//本地存储用户登录信息
+										sessionStorage.setItem("name",resp.body.name)
+										location.href="/bicycle-manager/main/index.html"
+									}
+								},
+								(resp) => {
+									
+								}
+							);
+					}
+					
+					
+				},
+				login2: function(){
+					this.$http.post("phoneLogin",this.syuser).then(
+							(resp) => {
+								if(resp.body == ""){
+									this.showInfo = true;
+									this.message = "手机号不存在或验证码错误";
+								}else{
+									sessionStorage.setItem("name",resp.body.name);
+									location.href="/bicycle-manager/main/index.html"
+								}
+								
+							},
+							(resp) => {
+								console.error(resp);	
+							}
+						);
+				},
+				phoneCode: function(){
+					this.type = 'phoneCode'
+				},
+				passLogin: function(){
+					this.type = 'passLogin'
+				},
+				showtime: function(t){
+					var reg=/^1[35-8]\d{9}$/;
+					var mobilePhone = this.syuser.mobilePhone;
+					if(!reg.test(mobilePhone)){
+						alert("请输入正确的手机号");
+						this.syuser.mobilePhone="";
+					}else{
+						this.disabled2=true;
+						//获取验证码
+						var params = {
+						params : {mobilePhone:mobilePhone}
+						};
+						this.$http.get("sendCode",params).then(
+							(resp) => {
+								if(resp.bodyText == "用户不存在"){
+									alert("用户不存在")
+								}else if(resp.bodyText == "fail"){
+									alert("服务器异常，请联系管理员")
+								}else{
+									alert("您的验证码是["+resp.bodyText+"]，60秒内有效，请勿泄露。");
+									for(i=1;i<=t;i++) {
+							 			setTimeout("vm.update("+i+","+t+")", i*1000);
+							 		}
+								}
+							},
+							(resp) => {
+								
+							}
+						);
+						
+					}
+					
+					},
+					update: function(num,t){
+						if(num==t){
+							this.text="重新发送";
+							this.disabled2=false;
+						}else{
+							printnr = t-num;
+							this.text=" (" + printnr +")秒后重新发送";
+						}
+					}
+				}
+				
+		}); 
+	 	
+	</script>
+
+
+
+
+</body>
+
+</html>

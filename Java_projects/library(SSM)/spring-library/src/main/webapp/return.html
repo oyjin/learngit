@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>还书</title>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h2 style="text-align:center">我的租书列表</h2>
+		<table border="1" width="80%" align="center" style="text-align:center">
+			<tr>
+				<th></th>
+				<th>图书编号</th>
+				<th>租书时间</th>
+				<th>到期时间</th>
+				<th>剩余免费天数</th>
+			</tr>
+			<tr v-for="(book_record,index) in book_records">
+				<td><input type="checkbox" name="num" v-model="number" :value="index"></td>
+				<td>{{book_record.bookid}}</td>
+				<td>{{book_record.lendtime}}</td>
+				<td>{{book_record.expiretime}}</td>
+				<td>{{book_record.remaintime}}</td>
+			</tr>
+		</table><br>
+		您选中的图书为：{{number}}
+		<br>
+		<div style="width:100%;text-align:center">
+			<input type='button' value='一键还书' @click="returnBook()"/>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var vue = new Vue({
+			el: "#app",
+			data : {
+				book_records:[],
+				number:[]
+			},
+			methods:{
+				goPage : function(){
+					this.$http.get("book/return").then(
+							(resp) => {
+								// resp是一个Response对象 该对象属性 body - 对象      bodyText 服务端响应的字符串
+								console.log(resp);
+								this.book_records = resp.body;
+							},
+							(resp) => {
+								console.error("请求失败，"+resp);
+							}
+							
+						);
+				},
+				returnBook: function(){
+					var bookids = new Array();
+					for(var i = 0; i < this.number.length; i++){
+						var n = this.number[i];
+						bookids[i] = this.book_records[n].bookid;
+					};
+					var data = {
+							bookids:bookids
+						};
+					var params = {
+						params : data
+					};
+					this.$http.get("returnBook",params).then(
+							(resp) => {
+								alert(resp.bodyText);
+								location.reload();
+							},
+							(resp) => {
+								console.error("请求失败，"+resp);
+							}	
+					
+					);
+				}
+			},
+			mounted : function(){
+				this.goPage();
+			}
+		})
+	</script>
+</body>
+</html>

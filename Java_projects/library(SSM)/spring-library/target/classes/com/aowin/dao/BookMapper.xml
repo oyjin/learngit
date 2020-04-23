@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace 映射文件的命名空间 写接口的全称  -->
+<mapper namespace="com.aowin.dao.BookMapper">
+  
+  <!-- 
+  	查询语句一定要设置 resultType或者resultMap的属性  用来对结果集做映射的
+  	
+  		resultType 自动映射，会将查询结果的列 自动映射到java中对象的属性中的
+   -->
+  <select id="selectBook" resultType="com.aowin.model.Book">
+  	select
+  		bookid,
+  		bookname,
+  		author,
+  		price,
+  		publisher,
+  		status,
+  		bookcode
+  	from
+  		book
+  	where
+  		status=1
+  	
+  </select>
+  
+   <select id="isTimeOut" resultType="java.lang.Integer">
+  	select 
+  		count(*) 
+  	from 
+  		book_record
+	where 
+		userid=#{userid} and expiretime &lt; CURRENT_TIMESTAMP
+  </select>
+  
+  <select id="lendCount" resultType="java.lang.Integer">
+  	select 
+  		count(*) 
+  	from 
+  		book_record
+	where 
+		userid = #{userid} and returntime = "0000-00-00 00:00:00"
+  </select>
+  
+  <update id="lendBook" >
+  	update book set status = -1 where bookid = #{bookid}
+  </update>
+  
+   <insert id="addBookRecord">
+    insert into book_record
+  		(userid,bookid,lendtime,expiretime) 
+  	values
+  		(#{userid},#{bookid},#{lendtime},date_add(#{lendtime}, interval 30 day))
+  </insert>
+  
+  
+  <select id="selectRecords" resultType="com.aowin.model.BookRecord">
+  	select
+  		bookid,
+  		lendtime,
+  		expiretime
+  	from
+  		book_record
+  	where
+  		userid=#{userid} and returntime = "0000-00-00 00:00:00"
+  	
+  </select>
+  
+</mapper>
