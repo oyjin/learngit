@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		<style>
+			.red{
+				color: red;
+			}
+			.green{
+				color: green;
+			}
+			.max{
+				font-size: 56px;
+			}
+			.min{
+				font-size: 20px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--
+			v-bind指令
+				v-bind:attr   attr是html的属性 用于绑定html的属性的
+				
+				简写为
+					:attr 
+		-->
+		<div id="app">
+			<p v-bind:title="title">{{message}}</p>
+			<input type="text" :value="myname"/>
+			<a :href="url">百度一下</a>
+			
+			<input type="button" value="按钮" :disabled="!btnEnabled" onclick="vue.btnEnabled = false"/>
+			
+			<!--
+				修改data的值，会影响到view中的值的
+			-->
+			<input type="button" value="修改myname的值" onclick="vue.myname = '李四'"/>
+		
+			<!--
+				动态绑定添加的class样式
+			-->
+			<p :class="{'red':wrong, 'green':!wrong, 'max': wrong,'min': !wrong}">带样式的段落</p>
+		</div>
+		<script type="text/javascript">
+			var vue = new Vue({
+				el: "#app",
+				data: {
+					message: "段落",
+					title: "段落标题",
+					myname: "张三",
+					url: "https://www.baidu.com",
+					btnEnabled : true,
+					wrong: false
+				}
+			});
+			
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

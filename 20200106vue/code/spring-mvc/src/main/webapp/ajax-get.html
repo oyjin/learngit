@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax-get请求</title>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-resource.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h1>用户列表</h1>
+		<table border="1" width="80%" align="center">
+			<tr>
+				<th></th>
+				<th>序号</th>
+				<th>用户id</th>
+				<th>用户名</th>
+			</tr>
+			<tr v-for="(user,index) in users">
+				<td><input type="checkbox" name="return" v-model="code" :value="index+1"></td>
+				<td>{{index+1}}</td>
+				<td>{{user.userId}}</td>
+				<td>{{user.username}}</td>
+			</tr>
+		</table>
+		您选中的爱好为：{{code}}
+	</div>
+	
+	<script type="text/javascript">
+	
+		var vue = new Vue({
+			el: "#app",
+			data : {
+				users : [],
+				code: []
+			},
+			methods : {
+				goPage : function(pageNum){
+					// 发送ajax的get请求
+					// get请求的请求参数封装
+					var data = {
+							username : "lisi",
+							pageNum: pageNum,
+							userId: ""
+						};
+					var params = {
+						params : data
+					};
+					
+					/*
+					this.$http.get("user/select",params).then(
+						function(resp){},// 请求成功的回调
+						function(resp){} // 请求失败的回调
+					);*/
+					
+					// 简写
+					
+					this.$http.get("user/select",params).then(
+						(resp) => {
+							// resp是一个Response对象 该对象属性 body - 对象      bodyText 服务端响应的字符串
+							console.log(resp);
+							this.users = resp.body;
+						},
+						(resp) => {
+							console.error("请求失败，"+resp);
+						}
+						
+					);
+					
+				}
+				
+			},
+			// 生命周期函数 该函数是在页面加载完成之后调用
+			mounted : function(){
+				this.goPage(1);
+				
+			}
+		});
+	
+	</script>
+
+
+</body>
+</html>

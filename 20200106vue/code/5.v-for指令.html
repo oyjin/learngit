@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		
+	</head>
+	<body>
+		<!--
+			v-for="item in data"
+		-->
+		<div id="app">
+			<ul>
+				<li v-for="item in news"><a :href="'detail?newsid='+item.newsId">{{item.title}}</a></li>
+			</ul>
+			
+			<select>
+				<option v-for="item in citys" :value="item.cityCode">{{item.city}}</option>
+			</select>
+			
+			<table border="1">
+				<tr>
+					<th>序号</th>
+					<th>名字</th>
+				</tr>
+				<tr v-for="(item,index) in names">
+					<td>{{index+1}}</td>
+					<td>{{item}}</td>
+				</tr>
+				
+			</table>
+		</div>
+		<script type="text/javascript">
+			var vue = new Vue({
+				el: "#app",
+				data: {
+					news : [
+						{newsId:1,title:'title1',content:'content1'},
+						{newsId:2,title:'title2',content:'content2'},
+						{newsId:3,title:'title3',content:'content3'}
+					],
+					citys: [
+						{cityCode: "0571", city: "杭州"},
+						{cityCode: "0572", city: "宁波"},
+						{cityCode: "0573", city: "温州"}
+					],
+					names : ["张三","张思","张无"]
+				}
+			});
+		</script>
+		
+		
+	</body>
+</html>

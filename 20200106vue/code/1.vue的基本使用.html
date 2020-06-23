@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 引入vue.js文件 -->
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!-- view 部分  view部分 对应的就是html的标签+vue的动态显示的标签 -->
+		<div id="app">
+			<h1>{{title}}</h1>
+			<p>{{content}}</p>
+			<p>{{show("小明")}}</p>
+			<p>{{show("小宏")}}</p>
+		</div>
+
+		<script type="text/javascript">
+			// 定义ViewModel对象
+			var vue = new Vue({
+				el : "#app", // 定义视图的id
+				data : {
+					title: "今天好热啊",
+					content: "杭州一下子进入夏天了"
+				}, // 定义model数据
+				methods: {
+					show : function(name){
+						return "我的名字叫"+name+",我是通过调用show方法显示出来的";
+					}
+				} // 定义方法
+			});
+			
+			// Vue对象属性 vue对象的数据属性和方法属性 可以直接使用对象.属性名或者方法名使用
+			console.log(vue.title);
+			console.log(vue.show("张三")); // 调用方法
+			
+			// Vue对象本身属性 使用$开头用于区分的
+			console.log(vue.$data.title);
+			console.log(vue.$data);
+			
+			console.log(vue.$el == document.getElementById("app"));
+			
+			
+		</script>
+		
+	</body>
+</html>

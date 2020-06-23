@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/vue.js"></script>
+
+</head>
+
+<body>
+    <!--
+			
+		-->
+    <div id="app">
+        <div v-show="isInsert">新增</div>
+        <div v-show="isUpate">修改</div>
+    </div>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#app",
+            data: {
+                isUpate: true,
+                isInsert: false
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
