@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var count=0;
+        var temp=0;
+        function beg(){
+            //通过id获得img标签
+            var w=document.getElementById("w")
+            w.src="img/"+count%9+".jpg";
+            count++;
+            if(count>1000){
+                count=0;
+            }
+            //用变量接受定时器
+           temp= setTimeout("beg()",50);
+        }
+        function en(){
+            //清理定时器
+            clearTimeout(temp);
+        }
+      
+    </script>
+</head>
+<body>
+    <h1>选女朋友!</h1>
+    <img src="img/0.jpg" width="250px" height="400px"  id="w">
+    <input type="button" value="开始" onclick="beg()" >
+    <input type="button" value="停止" onclick="en()" >
+</body>
+</html>

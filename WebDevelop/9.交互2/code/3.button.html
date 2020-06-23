@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function alive(){
+            var per=document.getElementById("per");
+            //移出属性
+            per.removeAttribute("disabled");
+            per.value="我又活过来了";
+        }
+        function dead(){
+            var per=document.getElementById("per");
+            per.disabled="true";
+            per.value="我已经死了";
+        }
+    
+    </script>
+</head>
+<body>
+    <form action="">
+        <input type="button" value="确定" id="per" disabled="true">
+        <input type="button" value="判官" onclick="alive()" ondblclick="dead()">
+    </form>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 函数:能够完成指定功能的一段代码
+        //函数需要先声明,再调用,函数只能被调用时执行
+        /*
+            function 函数名(参数1,参数2,....){
+                函数体
+            }
+            函数声明时的参数为形参
+            函数调用时的参数为实参
+            调用时,将实参的值传给形参
+        
+        */
+        //函数的声明
+        function isJiOu(num){
+            /*if(num%2==0){
+                return true;
+                //return 返回值     执行到return 时,函数结束并返回值
+            }
+            return false;*/
+            return num%2==0?true:false;
+            
+        }
+        //函数的调用
+        isJiOu(3);
+        function getSum(start,end){
+            var sum=0;
+            for(var i=start;i<=end;i++){
+                if(isJiOu(i)){
+                    sum+=i;
+                }
+            }
+            alert(sum);
+        }
+        getSum(1,100);
+        //写一个函数 判断一个数是否为质数
+        function isPrim(num){
+            if(num==1){
+                return false;
+            }
+            if(num==2){
+                return true;
+            }
+            for(var i=2;i<num;i++){
+                if(num%i==0){
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

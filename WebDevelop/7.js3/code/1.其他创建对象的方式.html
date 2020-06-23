@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 1.构造函数创建对象
+        function Car(color,brand,price,stop){
+            //this泛指当前类的对象
+            this.color=color;
+            this.brand=brand;
+            this.price=price;
+            this.stop=stop;
+        }
+        var stop=function(){
+            console.log("停车...");
+        }
+        var c1=new Car("红色","奔驰",100000);
+        console.log(c1.color+"  "+c1.price);
+        var c2=new Car("绿色","宝马",100000,stop);
+        console.log(c2.color+"  "+c2.price);
+        c2.stop();
+       
+        //2.文字标记方式
+        var c3={
+            //json格式
+            color:"红色",
+            brand:"凯迪拉克",
+            price:100000,
+            drive:function(){
+                console.log("开车了...");
+            }
+        }
+        console.log(c3.brand);
+        //文字标记组
+        var arr=[
+            {
+                color:"红色",
+                brand:"凯迪拉克",
+                price:100000,
+                drive:function(){
+                    console.log("开车了...");
+                }
+
+            },
+            {
+                color:"红色",
+                brand:"凯迪拉克",
+                price:100000,
+                drive:function(){
+                    console.log("开车了...");
+                }
+            }
+
+
+        ]
+        console.log(arr[0].color);
+        //3.工厂模式
+        function  getCar(){
+            var o1=new Object();
+            o1.color="红色";
+            o1.brand="奔驰";
+            return o1;
+            
+        }
+        var c4=getCar();
+        console.log(c4.brand);
+        //4.原型模式
+        function Dog(){
+            Dog.prototype.type="哈士奇";
+            Dog.prototype.color="白色";
+        }
+        var d1=new Dog();
+        console.log(d1.type);
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

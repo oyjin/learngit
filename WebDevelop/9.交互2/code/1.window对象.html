@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Window 对象代表一个浏览器窗口或一个框架。
+    Window 对象会在 <body> 或 <frameset> 每次出现时被自动创建。 
+    -->
+    <span id="sp"></span>
+</body>
+</html>
+<script>
+    
+        // alert("sda");
+        // window.alert("第二个");
+        //var result=window.confirm("确定删除么?");
+        //alert(result);
+        // var result=window.prompt("请输入...");
+        // alert(result);
+        // alert(typeof(null));
+        //window.open("http://www.baidu.com");
+        
+        var count=5;
+        var time=0;
+        function lo(){
+            if(count==0){
+                clearTimeout(time);
+                window.location.href="http://www.baidu.com"; 
+                return;
+            }
+            var sp=document.getElementById("sp");
+            sp.innerHTML=count;
+            sp.style.color="red";
+            sp.style.fontSize="50px";
+            count--;
+            time=setTimeout("lo()",1000);
+        }
+        lo();
+    
+    </script>

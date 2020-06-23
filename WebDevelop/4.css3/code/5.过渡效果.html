@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #thu{
+            width: 10px;
+            height: 20px;
+            background-color: tomato;
+            transition: width 5s,height  5s;
+        }
+        #thu:hover{
+            width:1000px;
+            height: 800px;
+        }
+        #hol{
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+            transition: transform 4s;
+        }
+        #hol:hover{
+            transform:rotate(1440deg);
+        }
+        #outter-div{
+            transition: transform 4s;
+        }
+        #outter-div:hover{
+            transform: translate(1000px,0);
+        }
+    </style>
+</head>
+<body>
+    <div id="thu">
+
+    </div>
+    <div id="outter-div">
+            <div id="hol">
+                    q
+                </div>
+    </div>
+    
+</body>
+</html>

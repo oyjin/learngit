@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function ling(){
+            alert("改变了");
+        }
+        function se(){
+            alert("选取了");
+        }
+        function fo(){
+            alert("获得焦点");
+        }
+        
+    </script>
+</head>
+<body>  
+    <!-- onsubmit 表单提交时执行脚本 -->
+    <!-- onreset 表单重置时执行脚本 -->
+    <form action="" onsubmit="fo()" onreset="se()">
+        <!-- onchange 元素改变时执行脚本 -->
+        <!-- onselect 选取元素时执行脚本 -->
+        <!-- onfocus 元素获得焦点时执行脚本 -->
+        <!-- onblur 元素失去焦点时执行脚本 -->
+        姓名:<input type="text" onchange="ling()" onselect="se()" >
+        班级:<input type="text">
+        <br><br>
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+
+    </form>
+    
+</body>
+</html>

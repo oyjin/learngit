@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 正则表达式是一种规则,验证字符串是否符合该规则,符合返回true,不符合返回false
+        //1.定位符号 ^ 以XXX开头 $ 以XXX结尾
+        //不定数量符号
+        //2.  ? 0个或者1个 最多有1个
+        //3.  * 任意个
+        //4.  + 1个或多个  最少有1个
+        //字符符号
+        //5.  \d 0-9任意一个字符               \D 非0-9任意一个字符
+        //6.  \w 任意一个数字,字母,下划线       \W 任意一个非数字,字母,下划线
+        //7.  \s 一个空格或者换行               \S 非空格或者换行
+        //固定数量的符号
+        //8. {m} m个字符
+        //9. {m,} 最少有m个
+        //10. {m,n} 最少有m个,最多有n个
+        //11.   .任意单个字符 除了换行
+        //12. () 分组
+        //13. [] 可以使用中括号中的任意字符
+        // var reg=/^1[35-8]\d{9}$/;
+        // var result=reg.test("17665138894");
+        // alert(result);
+        //  aaabbbcccd     aaabbc    aaac   
+        //  idnfduf233---__    233-    
+        // 343dfdnf__
+        // 邮箱  数字字母下划线6-12位@2-4位数字.com
+        // ip 1-3数字.1-3数字.1-3数字.1-3数字
+        // 1  35678 374387436
+        // var reg = /^[a-zA-Z][a-zA-Z\d]{2,17}@([a-zA-Z\d]+.)com$/;
+        // alert(reg.test("oy02065@163.com"));
+        var reg = /^(([1-9]{1}\d*)|(0{1}))(\.\d{0,2})?$/;
+        alert(reg.test(10));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

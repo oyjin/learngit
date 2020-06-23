@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+<body>
+     <form action="">
+        <input type="text" readonly="true" id="inp">
+        <input type="button" onclick="use()" value="确定" ondblclick="unuse()">
+     </form>
+</body>
+<script>
+        function use(){
+            var inp=document.getElementById("inp");
+             inp.removeAttribute("readonly");
+        }
+        function unuse(){
+            var inp=document.getElementById("inp");
+            //注意,此时的O是大写的
+            inp.readOnly=true;
+        }
+    
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #d1 {
+            width: 600px;
+            height: 300px;
+            background-color: chartreuse;
+            /* 隐藏 */
+            /* display:none; */
+        }
+        
+        #d2 {
+            width: 600px;
+            height: 300px;
+            background-color: crimson;
+        }
+    </style>
+    <script>
+        function hideGreen() {
+            var d1 = document.getElementById("d1");
+            var d2 = document.getElementById("d2");
+            d1.style.display = "none";
+            d2.style.display = "";
+        }
+
+        function hideRed() {
+            var d1 = document.getElementById("d1");
+            var d2 = document.getElementById("d2");
+            d2.style.display = "none";
+            d1.style.display = "";
+        }
+    </script>
+</head>
+
+<body>
+    <div id="d1">
+        <form action="">
+            <input type="button" value="隐藏绿色,显示红色" onclick="hideGreen()">
+        </form>
+    </div>
+    <div id="d2">
+        <form action="">
+            <input type="button" value="隐藏红色,显示绿色" onclick="hideRed()">
+        </form>
+    </div>
+</body>
+
+</html>

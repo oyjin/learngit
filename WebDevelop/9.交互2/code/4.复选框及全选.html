@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style: none;
+        }
+    
+    </style>
+    <script>
+        /*
+            全选思想:
+                将所有子项放到数组中,当点击全选时,判断全选按钮是否被选中,如果选中,遍历数组,并让数组中的每个子项都选中,如果没选中,遍历数组,并让数组中的每个子项都不选中;
+            子项思想:
+                当点击任意一个子项时,判断当前选中的子项的个数是否与子项数组的长度相同,如果相同,让全选按钮选中,如果不同,全选按钮不选中
+        
+        */
+            function selectAll(obj){
+                
+                var sub=document.getElementsByClassName("sub");
+                if(obj.checked){
+                    for(var i=0;i<sub.length;i++){
+                        sub[i].checked=true;
+                    }
+                }else{
+                    for(var i=0;i<sub.length;i++){
+                        sub[i].checked=false;
+                    }
+                }
+            }
+            function se(){
+                var count =0;
+                var sub=document.getElementsByClassName("sub");
+                var selAll=document.getElementById("se");
+                for(var i=0;i<sub.length;i++){
+                    if(sub[i].checked){
+                        count++;
+                    }
+                }
+                if(count==sub.length){
+                    selAll.checked=true;
+                }else{
+                    selAll.checked=false;
+                }
+            }
+    </script>
+</head>
+<body>
+    <ul>
+        <li><input type="checkbox" id="se" onclick="selectAll(this)" >全选</li>
+        <li><input type="checkbox" class="sub" onclick="se()">选项1</li>
+        <li><input type="checkbox" class="sub" onclick="se()">选项2</li>
+        <li><input type="checkbox" class="sub" onclick="se()">选项3</li>
+        <li><input type="checkbox" class="sub" onclick="se()">选项4</li>
+        <li><input type="checkbox" class="sub" onclick="se()">选项5</li>
+
+    </ul>
+</body>
+</html>

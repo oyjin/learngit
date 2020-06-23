@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table{
+            /* 去掉单元格之间的间距 */
+            border-collapse: collapse;
+            text-align: center;
+        }
+        #left{
+            float: left;
+            width:700px;
+            height: 1000px;
+            border: 1px solid black;
+        }
+        #right{
+            float: left;
+            width:300px;
+            height: 1000px;
+            border: 1px solid black;
+        }
+        #right-content{
+            width:300px;
+            height: 400px;
+            display: none;
+        }
+    </style>
+    <script>
+        
+        function show1(obj){
+            var d=document.getElementById("right-content");
+            if(obj.value=="添加一行"){
+                d.style.display="block";
+                obj.value="完成";
+            }else{
+                var con=document.getElementsByClassName("con");
+                var ta =document.getElementById("ta");
+                var th=document.getElementsByTagName("th");
+                //当参数为-1时,是在最后一行添加数据
+                var result=ta.insertRow(-1);
+                for(var i=0;i<th.length;i++){
+                    var td=document.createElement("td");
+                    if(i==0){
+                        td.innerHTML="<input type='checkbox'>";
+                    }else if(i==th.length-1){
+                        td.innerHTML="<input type='button' value='删除' onclick='del(this)'>";
+                    }else{
+                        //将对应的输入框中的值写入到对应的单元格中
+                        td.innerHTML=con[i-1].value;
+                        //将输入框中内容隐藏
+                        con[i-1].value="";
+                    }
+                    result.appendChild(td);
+                }
+                d.style.display="none";
+                obj.value="添加一行";
+                
+            }
+           
+        }
+         
+         function del(obj){
+             //行对象有属性rowIndex 代表当前行的索引位置
+          //alert(  obj.parentNode.parentNode.rowIndex);
+          var ta =document.getElementById("ta");
+          //deleteRow 删除指定索引位置的行 如果参数为-1 删除的是最后一行
+          ta.deleteRow(obj.parentNode.parentNode.rowIndex);
+         }
+
+         function delAll(){
+            var ta =document.getElementById("ta");
+           //获得所有行元素
+           var rows=ta.rows;
+           //alert(rows.length);
+        //    for(var i=rows.length-1;i>0;i--){
+        //         alert(i+"   "+rows.length);
+        //        ta.deleteRow(-1);
+        //    }
+        while(rows.length>1){
+            ta.deleteRow(-1);
+        }
+         }
+         //tr.children    tr.cells tr的所有单元格
+    </script>
+</head>
+<body>
+    <!-- 
+
+        传值思想:
+            将输入框分成一类,对应的姓名,地址,年龄,的索引位置是表格中的对应位置的 索引位置-1
+
+        this使用情况:当该操作会用到当前标签时,使用this
+
+
+     -->
+    <div id="left">
+    <table border="1" width="600px" id="ta">
+        <tr><th><input type="checkbox">全选</th><th>姓名</th><th>地址</th><th>年龄</th><th>操作</th>
+        </tr>
+
+    </table>
+    <input type="button" value="全部删除" onclick="delAll()">
+    </div>
+  
+    <div id="right">
+            <input type="button" value="添加一行" onclick="show1(this)">
+            <div id="right-content">
+                姓名:<input type="text" class="con"> <br><br>
+                地址:<input type="text" class="con"><br><br>
+                年龄:<input type="text" class="con">
+            </div>
+    </div>
+</body>
+</html>

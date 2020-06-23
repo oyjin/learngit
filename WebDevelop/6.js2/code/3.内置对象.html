@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //1.数学
+        // 参数1的参数2次方
+        //alert(Math.pow(10,2));
+        //开根号
+        //alert(Math.sqrt(144));
+        //随机数 0-1之间的小数
+        // for(var i=0;i<100;i++){
+        //    console.log(parseInt(Math.random()*11)+20);
+        // }
+        //四舍五入
+        console.log(Math.round(4.5));    
+        //向下取整
+        console.log(Math.floor(4.5)); 
+        //向上取整
+        console.log(Math.ceil(4.5));
+        //日期:
+        var date=new Date();
+        //获得日期
+        console.log(date.getDate());
+        //获得1970 年到现在的毫秒数
+        console.log(date.getTime());
+        console.log(date.getMonth());
+        console.log(date.getFullYear());
+        console.log(date);
+        //3.数组对象
+        //数组:将数据存放到一串连续的地址中,每个元素都有索引位置,通过索引位置来访问元素,索引位置从0开始
+        var a1=[1,2,3,7,9,"sad",true,6.8];
+        console.log(a1[3]);
+        var a2=new Array();
+        a2.push("sd");
+        a2.push(3);
+        console.log(a1.length);
+        //遍历数组
+        for(var i=0;i<a1.length;i++){
+            console.log(a1[i]);
+        }
+        //4.字符串对象
+        var s="          sadsadsad hgfd hghdg hfd  hfdjs f dfsfds        ";
+        console.log(s.length);
+        //获取指定位置上的字符
+        console.log(s.charAt(2));
+        //字符串截取
+        console.log(s.substring(2,3));
+        //去掉字符串两边的空格
+        console.log(s.trim());
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

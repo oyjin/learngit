@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 选择器：选择元素，并对其样式进行修改 */
+        /* 1.id选择器  一个页面中id是不能重复的，每一个元素只能有一个id  */
+        #p1{
+            color: red;
+        }
+        /* 2.类选择器，每个元素可以有一个class属性，一个页面中有很多个class属性 */
+        .bluep{
+            background-color: blue;
+            color: yellow;
+        }
+        /* 3.标签选择器：当前页面的所有该标签都是同一种样式 */
+        p{
+           font-size:50px;
+
+        }
+        a{
+            text-decoration-line: none;
+            color: black;
+        }
+        /* 4.组合选择器 将一些选择器临时的分为一组,组内的每个元素用逗号分隔 */
+        .bluep,#p1{
+            text-decoration-line:line-through;
+        }
+        /* 5.包含选择器  空格代表包含关系，翻译成里面的 */
+        h1 span{
+            color: chocolate;
+        }
+        /* 6.伪类选择器 */
+        a:hover{
+            /* 鼠标悬浮时修改其样式 */
+            text-decoration-line: underline;
+            color: orangered;
+        }
+        /* 7.通配符 */
+        *{
+        }
+    </style>
+</head>
+<body>
+    <p id="p1" >
+        赛风的发的时间反倒是反倒是积分多少你发的是
+        都是能否看到你是积分多少 的
+    </p>
+    <p class="bluep"> 
+        赛风的发的时间反倒是反倒是积分多少你发的是
+        都是能否看到你是积分多少 的
+    </p>
+    <p class="bluep">
+        赛风的发的时间反倒是反倒是积分多少你发的是
+        都是能否看到你是积分多少 的
+    </p>
+    <p>(｡･∀･)ﾉﾞ嗨</p>
+    <h1>
+        <span>标题1</span>
+        <span>标题2</span>
+    </h1>
+    <span>变色</span>
+    <a href="https://www.taobao.com/markets/3c/tbdc?spm=a21bo.2017.201867-main.10.5af911d9ilGsqt">家电</a>
+</body>
+</html>

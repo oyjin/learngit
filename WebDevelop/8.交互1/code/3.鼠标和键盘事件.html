@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function cli(){
+            alert("点击");
+        }
+        function chan(obj){
+            //alert(obj);
+            obj.style.backgroundColor="red";
+        }
+        function out(obj){
+            obj.style.backgroundColor="white";
+        }
+        function press(){
+            alert("按下了");
+        }
+    
+    </script>
+</head>
+<body>
+    <!-- onclick 单击时执行脚本 -->
+    <!-- onmouseover:鼠标悬浮时执行脚本-->
+    <!-- onmouseout:鼠标移出元素时执行脚本 -->
+    <p onclick="cli()" onmouseover="chan(this)" onmouseout="out(this)">发货都回复</p>
+    <form action="">
+        <!-- onkeypress 键盘按下又松开时执行脚本 -->
+        <!-- onkeyup 键盘松开时执行脚本 -->
+            <input type="text" onkeyup="press()">
+            <input type="button" value ="点我" onclick="cli()">
+    </form>
+
+</body>
+</html>

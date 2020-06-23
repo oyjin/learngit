@@ -1,0 +1,19 @@
+<html>
+	<head></head>
+<!--   
+	1.用frameset标签代替body,给页面分块
+	2.rows水平分割，cols垂直分割
+	3.每一块分割出来的地方都是一个frame或者一个frameset
+	4.每一个frame都有src属性，代表连接的网页
+	5.a标签有一个target属性，指的是在指定地点打开新页面（在一个name为c的frame中打开新页面）
+
+
+-->
+	<frameset rows="20%,*" noresize="noresize">
+		<frame src="head.html"></frame>
+		<frameset cols="20%,*">
+			<frame src="left.html"></frame>
+			<frame name="c"></frame>
+		</frameset>
+	</frameset>
+</html>

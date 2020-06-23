@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function Car(){
+
+        }
+        //  类指的是对一种事物的抽象概念
+        // 对象是类的具体化,
+        var c1=new Car();
+        c1.color="红色";
+        c1.brand="奔驰";
+        c1.drive=function(){
+            console.log("汽车开动了....");
+        }
+        console.log(c1.color+" "+c1.brand);
+        var c2=new Car();
+        c2.color="绿色";
+        c2.price=120000;
+        c2.stop=function(){
+            console.log("刺啦...");
+        }
+        c2.stop();
+
+
+
+        function Dog(){
+
+        }
+        var d1=new Dog();
+        d1.color="粉色";
+        d1.type="泰迪";
+        d1.bark=function(){
+            console.log("杨首政你过来!!!");
+        }
+        console.log(d1.color+d1.type);
+        d1.bark();
+        // 猫
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

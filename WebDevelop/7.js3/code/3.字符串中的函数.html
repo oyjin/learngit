@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        //match 按照正则表达式的规则去匹配字符串(正常情况下返回第一个匹配到的字符串),i代表忽略大小写,g全局匹配(结果返回所有符合规则的字符串的数组)
+        var str="Hhfdshdshfhduf8fds  gfdg odsf ds9u 0dsd j od";
+        var result=str.match(/h/g);
+        alert(result);
+       // alert(result);
+       // alert(result.length+" "+str.length);
+        //split 分割 按照正则表达式的规则将字符串分割,结果为数组
+        var arr=str.split(/\w*/);
+        var st="";
+        alert(arr);
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

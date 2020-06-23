@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 所有的2d转换的属性都是 transform  */
+        div{
+            width:200px;
+            height: 200px;
+            background-color: tomato;
+            /* 平移:translate */
+            /* 旋转:rotate 正数代表顺时针,负数代表逆时针 */
+            /* 翻转:skew */
+            /* transform:skew(0,20deg); */
+            /* 倍数增大:scale */
+            /* transform: scale(2,4); */
+        }
+    
+    </style>
+</head>
+<body onload="test()">
+    <div id="b">
+
+    </div>
+    <script>
+        var i=0;
+        var y=0;
+        function test(){
+            document.getElementById("b").style.transform="rotate("+i+"deg)";
+            i+=1;
+            y+=2;
+            setTimeout("test()",20);
+        }
+    
+    </script>
+</body>
+</html>

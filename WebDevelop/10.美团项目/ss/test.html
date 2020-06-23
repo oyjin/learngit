@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 页面显示开始
+        function show1(){
+            var back=document.getElementById("back-div");
+            back.style.display="none";
+        }
+        function show2(){
+            var back=document.getElementById("back-div");
+            back.style.display="block";
+            var front=document.getElementById("front-div");
+            front.style.display="none";
+        }
+        function show3(){
+            var back=document.getElementById("back-div");
+            back.style.display="none";
+            var front=document.getElementById("front-div");
+            front.style.display="block";
+        }
+    // 页面显示结束
+    //加入购物车
+        function addcart(obj){
+            var count=document.getElementById("count");
+            var ta=document.getElementById("ta");
+            count.innerHTML=parseInt(count.innerHTML)+1;
+            var tr=ta.insertRow(-1);
+            var th=document.getElementsByTagName("th");
+            for(var i=0;i<th.length;i++){
+                var td=document.createElement("td");
+                if(i==0){
+                    td.innerHTML="<input type='checkbox' class='sel' onclick='select1(this)'>";
+                }else if(i==th.length-1){
+                    td.innerHTML="<input type='button' value='删除' onclick='del(this)'>";
+                }else if(i==1){
+                    td.innerHTML=obj.parentNode.parentNode.parentNode.children[0].children[0].innerHTML;
+                }else{
+                    td.innerHTML=obj.parentNode.parentNode.parentNode.children[0].children[1].innerHTML;
+                }
+                tr.appendChild(td);
+            }
+            var selectAll=document.getElementById("selectAll");
+            selectAll.checked=false;
+            var dela=document.getElementById("dela");
+            dela.disabled="true";
+        }
+        //全选
+        function selectAll(obj){
+            var sel=document.getElementsByClassName("sel");
+            var ta=document.getElementById("ta");
+            var price=document.getElementById("price");
+            var dela=document.getElementById("dela");
+
+            var sum=0;
+            if(obj.checked){
+                for(var i=0;i<sel.length;i++){
+                    sel[i].checked=true;
+                    sum+=parseFloat(ta.rows[i+1].children[2].innerHTML);
+                }
+                price.innerHTML=sum;
+                dela.removeAttribute("disabled");
+            }else{
+                for(var i=0;i<sel.length;i++){
+                    sel[i].checked=false;
+                }
+                price.innerHTML=0;
+                dela.disabled="true";
+            }
+        }
+        //单个复选框的事件
+        function select1(obj){
+            var sel=document.getElementsByClassName("sel");
+            var selectAll=document.getElementById("selectAll");
+            var count=0;
+            var price=document.getElementById("price");
+            if(obj.checked){
+                price.innerHTML=parseFloat(price.innerHTML)+parseFloat(obj.parentNode.parentNode.children[2].innerHTML);
+                
+            }else{
+                price.innerHTML=parseFloat(price.innerHTML)-parseFloat(obj.parentNode.parentNode.children[2].innerHTML);
+            }
+            for(var i=0;i<sel.length;i++){
+                if(sel[i].checked){
+                    count++;
+                }
+            }
+            var dela=document.getElementById("dela");
+            if(count==sel.length){
+                selectAll.checked=true;
+                dela.removeAttribute("disabled");
+            }else{
+                selectAll.checked=false;
+                dela.disabled="true";
+            }
+        }
+        //删除
+        function del(obj){
+            var ta=document.getElementById("ta");
+            var count=document.getElementById("count");
+            count.innerHTML=parseInt(count.innerHTML)-1;
+            var price=document.getElementById("price");
+            if(obj.parentNode.parentNode.children[0].children[0].checked){
+                price.innerHTML=parseFloat(price.innerHTML)-parseFloat(obj.parentNode.parentNode.children[2].innerHTML);
+            }
+            var sel=document.getElementsByClassName("sel");
+            var selectAll=document.getElementById("selectAll");
+            var dela=document.getElementById("dela");
+            var index=obj.parentNode.parentNode.rowIndex;
+            ta.deleteRow(index);
+            var count1=0;
+            for(var i=0;i<sel.length;i++){
+                if(sel[i].checked){
+                    count1++;
+                }
+            }
+            if(count1==sel.length){
+                selectAll.checked=true;
+                dela.removeAttribute("disabled");
+            }
+            if(count.innerHTML=="0"){
+                selectAll.checked=false;
+                dela.disabled="true";
+            }
+            
+        }
+        //结算
+        function ok(){
+            var ta=document.getElementById("ta");
+            var sel=document.getElementsByClassName("sel");
+            var price=document.getElementById("price");
+            var selectAll=document.getElementById("selectAll");
+            var count=document.getElementById("count");
+            var dela=document.getElementById("dela");
+           
+            for(var i =sel.length-1;i>=0;i--){
+                if(sel[i].checked){
+                    ta.deleteRow(sel[i].parentNode.parentNode.rowIndex);
+                    count.innerHTML=parseInt(count.innerHTML)-1;
+                }
+
+            }
+            price.innerHTML=0;
+            if(selectAll.checked){
+                selectAll.checked=false;
+                dela.disabled="true";
+            }
+
+        }
+        //全部删除
+        function delAll(obj){
+            var ta=document.getElementById("ta");
+            var price=document.getElementById("price");
+            var count=document.getElementById("count");
+            var selectAll=document.getElementById("selectAll");
+            var rows=ta.rows;
+            while(rows.length>1){
+                ta.deleteRow(-1);
+            }
+            price.innerHTML=0;
+            count.innerHTML=0;
+            selectAll.checked=false;
+            obj.disabled=true;
+        }
+    </script>
+</head>
+<body onload="show1()">
+    <p onclick="show2()">我的购物车(<span id="count">0</span>)</p>
+    <!-- 前面的页面开始 -->
+   <div id="front-div">
+        <table border="1" width="200px">
+                <tr><td>汉堡</td><td>16.5元/份</td></tr>
+                <tr><td>xxxx</td><td><input type="button" value="加入购物车" onclick="addcart(this)"></td></tr>
+            </table>
+            <table border="1" width="200px">
+                    <tr><td>炒饭</td><td>16元/份</td></tr>
+                    <tr><td>xxxx</td><td><input type="button" value="加入购物车" onclick="addcart(this)" ></td></tr>
+                </table>
+   </div>
+   <!-- 前面的页面结束 -->
+   <!-- 后面的页面开始 -->
+        <div id="back-div">
+                <table border="1" width="500px" id="ta">
+                        <tr><th><input type="checkbox" onclick="selectAll(this)" id="selectAll">全选</th><th>菜名</th><th>价格</th><th>操作</th></tr>
+                                
+                </table>
+                <p onclick="show3()">继续点餐</p>
+                总价: <span id="price">0</span>元
+                <input type="button" value="结算" onclick="ok()"> <input type="button" id="dela" value="全部删除" onclick="delAll(this)" disabled="true">
+        </div>
+    
+</body>
+</html>

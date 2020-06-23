@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 当外部文件引入时,该script标签中的js代码不会执行 -->
+    <script src="js/my.js">
+    </script>
+    <script>
+        var count=0;
+        alert("1");
+        function getSum(){
+            //变量在使用之前必须赋初始值
+            var sum=0;
+            for(var i=0;i<100;i++){
+               
+                sum+=i;
+            }
+            alert(sum);
+        }
+        getSum();
+      console.log(i);
+    </script>
+</head>
+<script>
+        alert("2");
+    </script>
+<body>
+        <script>
+                alert("3");
+            </script>
+        
+    
+</body>
+<script>
+        alert("4");
+    </script>
+</html>
+<script>
+        alert("5");
+    </script>

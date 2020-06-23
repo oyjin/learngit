@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   
+</head>
+<body>
+    <span id="sp">这是文字1</span>
+    <span class="sd">这是文字2</span>
+    <span class="sd">这是文字3</span>
+    
+    <form action="">
+        <input type="text" id="te" value="sdsd">
+
+  
+    <ul id="u">
+        <li>这是1</li>
+        <li>这是1</li>
+
+
+    </ul>
+        <input type="button" value="添加" onclick="add()">
+        <input type="button" value="添加一行" onclick="addRow1()">
+    <table border="1" width="400px" id="tab">
+        <tr>
+            <th>姓名</th>
+            <th>班级</th>
+            <th>年龄</th>
+            <th>地址</th>
+            <th>操作</th>
+        </tr>
+        
+
+    </table>
+</form>
+</body>
+</html>
+<script>
+        // 1.查找结点的方式
+        //根据id查询标签对象
+        var sp=document.getElementById("sp");
+        //innerHTML获得元素中的文字(字符串)
+        //alert(sp.innerHTML);
+        //想要拿到输入框中的内容,不能使用innerHTML,要用value
+        var te=document.getElementById("te");
+       // alert(te.value);
+       //通过标签名拿到一些元素,返回htmlCollection 当作数组使用
+       var s=document.getElementsByTagName("span");
+    //    alert(s);
+    //    for(var i=0;i<s.length;i++){
+    //     alert(s[i].innerHTML);
+    //    }
+        //通过类名查找元素
+       var sd=document.getElementsByClassName("sd");
+    //    alert(sd);
+    //    for(var i=0;i<sd.length;i++){
+    //      alert(sd[i].innerHTML);
+    //   }
+      //通过父节点和子节点方式查找
+      // parentNode 父节点 children 子节点,返回htmlCollection 当作数组使用
+     alert(sp.parentNode.children[1].innerHTML);
+      //2.增加元素
+        function add(){
+            //获得ul
+            var u=document.getElementById("u");
+            //创建li标签
+            var li=document.createElement("li");
+            li.innerHTML="sss";
+            //将li标签添加到ul中
+            u.appendChild(li);
+        }
+        function addRow1(){
+            //获得表格
+            var tab=document.getElementById("tab");
+            //创建行
+            var tr=document.createElement("tr");
+            //获得表头个数,表头数组的长度为表头的个数
+            var th=document.getElementsByTagName("th");
+            for(var i=0;i<th.length;i++){
+                //根据数组长度创建单元格
+                var td=document.createElement("td");
+                if(i==th.length-1){
+                    td.innerHTML="<input type='button' value='删除' onclick='del(this)'>";
+                }else{
+                    td.innerHTML="1";
+                }
+               
+                //将单元格添加到行中
+                tr.appendChild(td);
+            }
+            //将行添加到表格中
+            tab.appendChild(tr);
+
+        }
+        //3.删除元素
+        function del(obj){
+            //获得表格
+            var tab=document.getElementById("tab");
+            //获得当前删除按钮的所在行元素
+            var nowRow=obj.parentNode.parentNode;
+            //删除当前行
+            tab.removeChild(nowRow);
+        }
+
+</script>
