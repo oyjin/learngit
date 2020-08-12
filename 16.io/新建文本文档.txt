@@ -1,0 +1,18 @@
+io用来输入和输出==》以程序为参照物
+
+IO的分类：字节流     字符流
+
+文件：
+File：文件     目录
+文件数据流：FileInputStream    FileOutputStream   FileReader   FileWriter
+添加缓冲区：BufferedInputStream  BufferedOutputStream   BufferedReader  BufferedWriter
+数据类型处理：DataOutputStream   DataInputStream
+输出流：PrintStream    PrintWriter
+转换数据流：InputStreamReader       OutputStreamWriter
+序列化：通过对象流处理对象（将对象保存到文件       对象在网络上传输等）
+	ObjectOutputStream    ObjectInputStream
+      要求：输入输出的对象要求实现接口Serializable
+	如果某个字段不需要序列化，增加关键字transient
+
+
+

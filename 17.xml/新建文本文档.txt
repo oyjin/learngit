@@ -1,0 +1,9 @@
+xml得解析有四种形式：dom     sax   jdom   dom4j
+
+会用：dom     dom4j（包括写xml      读xml）
+
+
+两种特殊的文件：dtd和schema，用来定义xml文档结构（有什么名字作得元素    个数    有什么样的子节点等）
+实体符号：用来在xml文件中添加特殊字符，如  <   >
+          &开头，；结束
+      &nbsp;       &lt;       &gt;

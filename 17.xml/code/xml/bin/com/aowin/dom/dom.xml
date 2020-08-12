@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<students>
+<student>
+<stuno>1001</stuno>
+<stuname>xiaoming</stuname>
+<age>20</age>
+</student>
+<student>
+<stuno>1002</stuno>
+<stuname>xiaohei</stuname>
+<age>19</age>
+</student>
+</students>

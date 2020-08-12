@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<students>
+  <student>
+    <stuno>1001</stuno>
+    <stuname>xiaoming</stuname>
+    <age>20</age>
+  </student>
+</students>
