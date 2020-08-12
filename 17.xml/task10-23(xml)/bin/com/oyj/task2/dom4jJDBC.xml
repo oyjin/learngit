@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<students>
+  <student>
+    <id>1001</id>
+    <name>小明</name>
+    <score>75.6</score>
+  </student>
+  <student>
+    <id>1002</id>
+    <name>小红</name>
+    <score>90.8</score>
+  </student>
+</students>
